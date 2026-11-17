@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10131a">
+<title>Андреев Иван — визитка</title>
+<style>
+  :root{
+    --bg:#0e1117;
+    --card:#161b24;
+    --line:#232a36;
+    --text:#eef2f8;
+    --muted:#96a1b4;
+    --accent:#4c8dff;
+    --accent-2:#22c55e;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:
+      radial-gradient(900px 500px at 50% -10%, #1b2436 0%, transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:28px 16px 40px;
+    min-height:100%;
+  }
+  main{width:100%;max-width:420px}
+  .card{
+    background:linear-gradient(180deg,#1a2130 0%, var(--card) 100%);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:26px 20px 20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    text-align:center;
+  }
+  .avatar{
+    width:92px;height:92px;border-radius:50%;
+    margin:0 auto 14px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:32px;font-weight:700;letter-spacing:.5px;
+    color:#fff;
+    background:linear-gradient(135deg,#3b82f6,#22c55e);
+    box-shadow:0 8px 24px rgba(59,130,246,.35);
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+  h1{font-size:22px;margin:0 0 4px;letter-spacing:.2px}
+  .role{color:var(--muted);font-size:14px;margin:0 0 20px}
+  .actions{display:grid;gap:10px;margin-bottom:18px}
+  .btn{
+    display:flex;align-items:center;gap:12px;
+    text-decoration:none;color:var(--text);
+    background:#1f2735;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px 16px;
+    font-size:16px;font-weight:600;
+    transition:transform .12s ease, background .12s ease, border-color .12s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn:active{transform:scale(.985)}
+  button.btn{width:100%;font:inherit;text-align:left;cursor:pointer;-webkit-appearance:none;appearance:none}
+  .btn svg{flex:0 0 22px;width:22px;height:22px;opacity:.9}
+  .btn.primary{background:linear-gradient(135deg,#2f6fe4,#4c8dff);border-color:#3b7bf0}
+  .btn.primary svg{opacity:1}
+  .btn .sub{display:block;font-size:12px;font-weight:400;color:rgba(255,255,255,.65);margin-top:2px}
+  .btn .label{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
+  .btn.tg{background:#1d2a3a;border-color:#27405c}
+  .btn.mail{background:#1c242f}
+  .info{
+    text-align:left;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    display:grid;gap:10px;
+  }
+  .row{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+  .row span:first-child{color:var(--muted)}
+  .row span:last-child{font-weight:600;text-align:right}
+  .hint{margin:16px 2px 0;color:var(--muted);font-size:12px;text-align:center}
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);
+    background:#22c55e;color:#04240f;font-weight:700;font-size:14px;
+    padding:10px 16px;border-radius:999px;opacity:0;pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  @media (prefers-color-scheme: light){
+    :root{--bg:#eef1f6;--card:#ffffff;--line:#e2e7ef;--text:#151a22;--muted:#68748a}
+    body{background:radial-gradient(900px 500px at 50% -10%, #dfe7f5 0%, transparent 60%), var(--bg)}
+    .card{background:#fff;box-shadow:0 16px 40px rgba(20,30,60,.12)}
+    .btn{background:#f3f6fb}
+    .btn.primary{background:linear-gradient(135deg,#2f6fe4,#4c8dff);color:#fff}
+    .btn.tg{background:#eaf3ff;border-color:#cfe3ff}
+  }
+</style>
+</head>
+<body>
+<main>
+  <section class="card">
+    <div class="avatar"><img src="data:image/jpeg;base64,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" alt="Аватар"></div>
+    <h1>Андреев Иван</h1>
+
+    <div class="actions">
+      <button class="btn primary" type="button" data-copy="+79521567740">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        <span class="label">Телефон<span class="sub">+7 952 156-77-40</span></span>
+      </button>
+
+      <a class="btn tg" href="https://t.me/DFshark_Mayanist" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.3-.4.4-.9.4l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L7.2 13.6 2.6 12.2c-1-.3-1-1 .2-1.5l18-6.9c.8-.3 1.5.2 1.1 1.5z"/></svg>
+        <span class="label">Telegram<span class="sub">@DFshark_Mayanist</span></span>
+      </a>
+
+      <a class="btn mail" href="mailto:ia7390472@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        <span class="label">Почта<span class="sub">ia7390472@gmail.com</span></span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast">Скопировано</div>
+<script>
+  const toast = document.getElementById('toast');
+  function showToast(text){
+    toast.textContent = text;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.remove('show'), 1400);
+  }
+  function execCopy(text){
+    return new Promise((resolve, reject) => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        ok ? resolve() : reject(new Error('copy failed'));
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  function copyText(text){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).catch(() => execCopy(text));
+    }
+    return execCopy(text);
+  }
+
+  document.querySelectorAll('[data-copy]').forEach(el => {
+    el.addEventListener('click', () => {
+      const value = el.getAttribute('data-copy');
+      copyText(value)
+        .then(() => showToast('Номер скопирован: ' + value))
+        .catch(() => showToast('Не удалось скопировать'));
+    });
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
